@@ -70,7 +70,10 @@ namespace NzbDrone.Core.Tv
 
                 else
                 {
-                    ToggleEpisodesMonitoredState(episodes.Where(e => e.SeasonNumber == season.SeasonNumber), false);
+                    if (!monitoringOptions.IgnoreEpisodesWithFiles && !monitoringOptions.IgnoreEpisodesWithoutFiles)
+                    {
+                        ToggleEpisodesMonitoredState(episodes.Where(e => e.SeasonNumber == season.SeasonNumber), false);
+                    }
                 }
 
                 if (season.SeasonNumber < lastSeason)
